@@ -1,10 +1,3 @@
-/**
- * 
- * @param {string} fecha
- * 
- * dia/mes ej-> 23/9
- */
-
 window.onload = signoZodiaco;
 
 function signoZodiaco() {
