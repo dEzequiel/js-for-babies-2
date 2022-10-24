@@ -59,10 +59,15 @@ function signoZodiaco() {
         },
     ];
 
-    const theSign = 'Tu signo es ' + zodiacos.filter(zodiaco =>
-        (DATE.getTime() >= zodiaco.start.getTime())
-        && (DATE.getTime() < zodiaco.end.getTime())
-    )[0].sign;
-
-    alert(theSign);
+    try {
+        const theSign = 'Tu signo es ' + zodiacos.filter(zodiaco =>
+            (DATE.getTime() >= zodiaco.start.getTime())
+            && (DATE.getTime() < zodiaco.end.getTime())
+        )[0].sign;
+    
+        alert(theSign);
+    } catch (e) {
+        alert('Escribe bien men...');
+    }
+    
 }
