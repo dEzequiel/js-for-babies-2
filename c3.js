@@ -1,16 +1,18 @@
-window.onload = signoZodiaco;
+// window.onload = signoZodiaco;
 
-function signoZodiaco() {
+function signoZodiaco(mes, dia) {
 
     const MONTHS = { 'enero': 0, 'febrero': 1, 'marzo': 2, 'abril': 3, 'mayo': 4, 'junio': 5, 'julio': 6, 'agosto': 7, 'septiembre': 8, 'octubre': 9, 'noviembre': 10, 'diciembre': 11 };
-    const MONTH_INDEX = MONTHS[prompt("Introduce el mes: ").toLowerCase()];
-    const DAY = parseInt(prompt('Introduce el número del día: '));
+    // const MONTH_INDEX = MONTHS[prompt("Introduce el mes: ").toLowerCase()];
+    const MONTH_INDEX = MONTHS[mes];
+    // const DAY = parseInt(prompt('Introduce el número del día: '));
+    const DAY = dia;
     const DATE = new Date(new Date().getFullYear(), MONTH_INDEX, DAY);
 
     var zodiacos = [
         {
             sign: 'ARIES',
-            start: new Date(DATE.getFullYear(), MONTHS['enero'], 21),
+            start: new Date(DATE.getFullYear(), MONTHS['marzo'], 21),
             end: new Date(DATE.getFullYear(), MONTHS['abril'], 19)
         }, {
             sign: 'TAURO',
@@ -47,7 +49,7 @@ function signoZodiaco() {
         }, {
             sign: 'CAPRICORNIO',
             start: new Date(DATE.getFullYear(), MONTHS['diciembre'], 22),
-            end: new Date(DATE.getFullYear(), MONTHS['enero'], 19)
+            end: new Date(DATE.getFullYear() + 1, MONTHS['enero'], 19)
         }, {
             sign: 'ACUARIO',
             start: new Date(DATE.getFullYear(), MONTHS['enero'], 20),
@@ -60,14 +62,23 @@ function signoZodiaco() {
     ];
 
     try {
+
+        if (DATE.getMonth() === MONTHS.diciembre) {
+            DATE = new Date(new Date().getFullYear() + 1, MONTH_INDEX, DAY);
+        }
+
         const theSign = 'Tu signo es ' + zodiacos.filter(zodiaco =>
             (DATE.getTime() >= zodiaco.start.getTime())
-            && (DATE.getTime() < zodiaco.end.getTime())
+            && (DATE.getTime() <= zodiaco.end.getTime())
         )[0].sign;
+        
+        return theSign;
     
-        alert(theSign);
+        // alert(theSign);
     } catch (e) {
-        alert('Escribe bien men...');
+        // alert('Escribe bien men...');
+        return 'escribe men';
     }
-    
 }
+
+signoZodiaco('diciembre', 29);
